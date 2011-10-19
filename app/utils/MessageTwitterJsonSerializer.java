@@ -32,7 +32,7 @@ public class MessageTwitterJsonSerializer implements JsonSerializer<MessageTwitt
 	public JsonElement serialize(MessageTwitter messageTwitter, Type type, JsonSerializationContext context) {
 		JsonObject obj = new JsonObject();
 		obj.addProperty("dateCreation", DATE_FORMAT.format(messageTwitter.getDateCreation()));
-		obj.addProperty("text", messageTwitter.getTexte());
+		obj.addProperty("texte", messageTwitter.getTexte());
 		return obj;
 	}
 

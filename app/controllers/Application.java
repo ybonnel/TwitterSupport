@@ -6,12 +6,12 @@ import utils.MessageTwitterJsonSerializer;
 
 public class Application extends Controller {
 
-    public static void index() {
-        render();
-    }
-
 	public static void starbusmetro() {
 		renderJSON(new GetTwitters("starbusmetro").getMessages(), MessageTwitterJsonSerializer.get());
+	}
+
+	public static void tbc() {
+		renderJSON(new GetTwitters("tbc").getMessages(), MessageTwitterJsonSerializer.get());
 	}
 
 }

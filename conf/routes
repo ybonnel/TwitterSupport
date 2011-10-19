@@ -2,14 +2,15 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
-GET     /                                       Application.index
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
+
+GET		/starbusmetro							Application.starbusmetro
+GET		/tbc									Application.tbc
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
