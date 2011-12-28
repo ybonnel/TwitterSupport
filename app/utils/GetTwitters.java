@@ -17,10 +17,8 @@
 package utils;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,22 +68,16 @@ public class GetTwitters {
 			for (Status status : listeStatus) {
 				messages.add(new MessageTwitter(status.getCreatedAt(), status.getText(), compte));
 			}
-			Collections.sort(messages, new Comparator<MessageTwitter>() {
-				public int compare(MessageTwitter o1, MessageTwitter o2) {
-					return o2.getDateCreation().compareTo(o1.getDateCreation());
-				}
-			});
-			Collection<MessageTwitter> messagesBdd = MessageTwitter.findByCompte(compte);
-			Date dateDernierMessage = null;
-			if (messagesBdd != null && !messagesBdd.isEmpty()) {
-				dateDernierMessage = messagesBdd.iterator().next().getDateCreation();
-			}
+			MessageTwitter.deleteAll();
 			for (MessageTwitter message : messages) {
-				if (dateDernierMessage == null || message.getDateCreation().after(dateDernierMessage)) {
-					message.save();
-				}
+				message.save();
 			}
 		}
+		Collections.sort(messages, new Comparator<MessageTwitter>() {
+			public int compare(MessageTwitter o1, MessageTwitter o2) {
+				return o2.getDateCreation().compareTo(o1.getDateCreation());
+			}
+		});
 		return messages;
 	}
 
