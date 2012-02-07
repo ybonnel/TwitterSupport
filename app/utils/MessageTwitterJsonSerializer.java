@@ -2,7 +2,9 @@ package utils;
 
 import java.lang.reflect.Type;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import models.MessageTwitter;
 
@@ -15,8 +17,10 @@ public class MessageTwitterJsonSerializer implements JsonSerializer<MessageTwitt
 
 	private static MessageTwitterJsonSerializer instance;
 
-	private static final DateFormat DATE_FORMAT = DateFormat.getDateTimeInstance(DateFormat.DEFAULT,
-			DateFormat.DEFAULT, Locale.US);
+	private static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+	static {
+		DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+	}
 
 	private MessageTwitterJsonSerializer() {
 	}
