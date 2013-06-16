@@ -30,6 +30,8 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+import twitter4j.conf.ConfigurationBuilder;
 
 public class GetTwitters {
 
@@ -45,7 +47,10 @@ public class GetTwitters {
 
 	private static synchronized TwitterFactory getFactory() {
 		if (twitterFactory == null) {
-			twitterFactory = new TwitterFactory();
+
+            ConfigurationBuilder builder = new ConfigurationBuilder();
+            builder.setUseSSL(true);
+			twitterFactory = new TwitterFactory(builder.build());
 		}
 		return twitterFactory;
 	}
@@ -58,7 +63,9 @@ public class GetTwitters {
 		} else {
 			LOGGER.fine("Les messages twitter ne sont pas à jour, récupération du contenu de twiter");
 			Twitter twitter = getFactory().getInstance();
-			ResponseList<Status> listeStatus;
+            twitter.setOAuthConsumer("9Jsib4k1uEMCWZqEHy1t1Q", "vLQQaog60gYRrPCC2bHeEZdod3JDSkTRI9W7r2cZIZ8");
+            twitter.setOAuthAccessToken(new AccessToken("225864007-Y11ZtDLq2LVZwMR3anKxPW9nR6dIGkLyFlOhdAMx", "GQ16L9QMhhzSiRT4xRia7B25011BoNsXUEgUyp0vKI"));
+            ResponseList<Status> listeStatus;
 			try {
 				listeStatus = twitter.getUserTimeline("@" + compte);
 			} catch (TwitterException e) {
